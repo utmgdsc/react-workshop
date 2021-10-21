@@ -22,14 +22,6 @@ import Sticky from "react-stickynode";
 import { colors } from "../theme";
 
 const navBtns = [
-  {
-    label: "Login",
-    href: "/login",
-  },
-  {
-    label: "Register",
-    href: "/register",
-  },
 ];
 
 const Logo = () => (
