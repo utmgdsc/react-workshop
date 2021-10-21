@@ -9,10 +9,18 @@ import {
   IconButton,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
-import * as React from "react";
+import React, { useState } from "react";
 import { HiTrash } from "react-icons/hi";
 
-export const Task = ({ title, children }) => {
+export const Task = ({ index, taskTitle, checked, children, handleDeleteTask }) => {
+  const [title, setTitle] = useState(taskTitle);
+  const [desc, setDesc] = useState(children);
+  const [isChecked, setIsChecked] = useState(checked);
+
+  const badgeInfo = isChecked
+    ? { color: "green", text: "Complete" }
+    : { color: "yellow", text: "In Progress" };
+
   return (
     <Box position="relative">
       <HStack
@@ -22,15 +30,15 @@ export const Task = ({ title, children }) => {
         color={mode("gray.500", "white")}
         mt="1"
       >
-        <Checkbox defaultIsChecked />
-        <Editable defaultValue={title}>
+        <Checkbox value={isChecked} onChange={() => setIsChecked(!isChecked)} />
+        <Editable value={title} onChange={(v) => setTitle(v)}>
           <EditablePreview />
           <EditableInput />
         </Editable>
       </HStack>
-      <Badge>Default</Badge>
+      <Badge colorScheme={badgeInfo.color}>{badgeInfo.text}</Badge>
       <Box mt="3" maxW="xl" color={mode("gray.600", "gray.200")}>
-        <Editable defaultValue={children}>
+        <Editable value={desc} onChange={(v) => setDesc(v)}>
           <EditablePreview />
           <EditableInput />
         </Editable>
@@ -55,6 +63,7 @@ export const Task = ({ title, children }) => {
           icon={<HiTrash />}
           rounded="full"
           size="sm"
+          onClick={() => handleDeleteTask(index)}
         />
       </HStack>
     </Box>
