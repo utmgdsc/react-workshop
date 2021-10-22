@@ -14,7 +14,7 @@ import { HiTrash } from "react-icons/hi";
 
 const Task = ({
   index,
-  taskId,
+  todoId,
   taskTitle,
   checked,
   children,
@@ -70,7 +70,7 @@ const Task = ({
           icon={<HiTrash />}
           rounded="full"
           size="sm"
-          onClick={() => handleDeleteTask(taskId, index)}
+          onClick={() => handleDeleteTask(todoId, index)}
         />
       </HStack>
     </Box>

@@ -8,12 +8,16 @@ import {
   Text,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Task from "./Task";
 
 const TaskList = ({ tasksList }) => {
   const [tasks, setTasks] = useState(tasksList);
+
+  useEffect(() => {
+    setTasks(tasksList);
+  }, [tasksList]);
 
   const handleAddTask = () => {
     const newTask = { title: "To do", description: "...", isChecked: false };
@@ -25,7 +29,7 @@ const TaskList = ({ tasksList }) => {
   };
 
   const handleDeleteTask = (id, index) => {
-    fetch(`http://localhost:3001/api/todos/${id}`, {
+    fetch(`http://localhost:3001/api/todo/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     }).then(() =>
@@ -75,6 +79,7 @@ const TaskList = ({ tasksList }) => {
               tasks.map((task, index) => (
                 <Task
                   key={`task-${task.title}`}
+                  todoId={task.todoid}
                   taskTitle={task.title}
                   checked={task.isChecked}
                   index={index}

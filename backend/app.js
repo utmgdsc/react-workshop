@@ -50,7 +50,7 @@ app.post('/api/todo', async (req, res) => {
 });
 
 app.delete('/api/todo/:id', async (req, res) => {
-    const { id } = req.query;
+    const { id } = req.params;
     try {
         await client.query('DELETE FROM todos WHERE todoid = $1', [id]);
     } catch(e) {
