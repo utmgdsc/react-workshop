@@ -18,6 +18,7 @@ const Task = ({
   taskTitle,
   checked,
   children,
+  handleEditTask,
   handleDeleteTask,
 }) => {
   const [title, setTitle] = useState(taskTitle);
@@ -37,15 +38,43 @@ const Task = ({
         color={mode("gray.500", "white")}
         mt="1"
       >
-        <Checkbox value={isChecked} onChange={() => setIsChecked(!isChecked)} />
-        <Editable value={title} onChange={(v) => setTitle(v)}>
+        <Checkbox
+          isChecked={isChecked}
+          onChange={() => {
+            const newIsChecked = !isChecked;
+            setIsChecked(newIsChecked);
+            handleEditTask(index, {
+              todoId,
+              title,
+              desc,
+              isChecked: newIsChecked,
+            });
+          }}
+        />
+        <Editable
+          value={title}
+          onChange={(v) => {
+            setTitle(v);
+          }}
+          onSubmit={() => {
+            handleEditTask(index, { todoId, title, desc, isChecked });
+          }}
+        >
           <EditablePreview />
           <EditableInput />
         </Editable>
       </HStack>
       <Badge colorScheme={badgeInfo.color}>{badgeInfo.text}</Badge>
       <Box mt="3" maxW="xl" color={mode("gray.600", "gray.200")}>
-        <Editable value={desc} onChange={(v) => setDesc(v)}>
+        <Editable
+          value={desc}
+          onChange={(v) => {
+            setDesc(v);
+          }}
+          onSubmit={() => {
+            handleEditTask(index, { todoId, title, desc, isChecked });
+          }}
+        >
           <EditablePreview />
           <EditableInput />
         </Editable>

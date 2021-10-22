@@ -28,6 +28,26 @@ const TaskList = ({ tasksList }) => {
     }).then(() => setTasks([...tasks, newTask]));
   };
 
+  const handleEditTask = (index, task) => {
+    console.log(task);
+    fetch(`http://localhost:3001/api/todo/${task.todoId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: task.title,
+        desc: task.desc,
+        isChecked: task.isChecked,
+      }),
+    }).then(() =>
+      setTasks((oldTasks) =>
+        oldTasks
+          .slice(0, index)
+          .concat(task)
+          .concat(oldTasks.slice(index + 1))
+      )
+    );
+  };
+
   const handleDeleteTask = (id, index) => {
     fetch(`http://localhost:3001/api/todo/${id}`, {
       method: "DELETE",
@@ -81,11 +101,12 @@ const TaskList = ({ tasksList }) => {
                   key={`task-${task.title}`}
                   todoId={task.todoid}
                   taskTitle={task.title}
-                  checked={task.isChecked}
+                  checked={task.ischecked}
                   index={index}
+                  handleEditTask={handleEditTask}
                   handleDeleteTask={handleDeleteTask}
                 >
-                  {task.desc}
+                  {task.description}
                 </Task>
               ))}
             {tasks.length === 0 && <p>No tasks to complete~ 🥳</p>}
