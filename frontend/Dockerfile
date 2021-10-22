@@ -1,13 +1,11 @@
-FROM node
-
-WORKDIR /app
-COPY package.json .
-COPY yarn.lock .
-
+FROM node:14-alpine
+ENV PORT 3000
+WORKDIR /frontend
+# install app dependencies
+COPY ./package.json ./yarn.lock ./
 RUN yarn
-
+# add app
+COPY . ./
+# start app
 EXPOSE 3000
-
-COPY . .
-
-CMD [ "yarn", "dev" ]
+CMD "yarn" "dev"

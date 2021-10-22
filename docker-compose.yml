@@ -30,11 +30,16 @@ services:
       PGPASSWORD: password
       PGPORT: 5432
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    command: npm start
+    build: ./frontend
+    stdin_open: true
+    tty: true
     ports:
       - 3000:3000
     volumes:
-      - ./frontend:/app/
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    environment:
+      - PORT=80
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend

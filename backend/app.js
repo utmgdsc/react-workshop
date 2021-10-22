@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // set the port for the Node application
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
 // create a client instance of the pg library
 const client = new Pool({
@@ -27,7 +27,7 @@ const client = new Pool({
     port: process.env.PGPORT,
 });
 
-app.get('/todos', async (req, res) => {
+app.get('/api/todos', async (req, res) => {
     try {
         const response = await client.query('SELECT * FROM todos;');
         const { rows } = response;
@@ -38,10 +38,21 @@ app.get('/todos', async (req, res) => {
     }
 });
 
-app.post('/todo', async (req, res) => {
-    const { message } = req.body;
+app.post('/api/todo', async (req, res) => {
+    const { title, description, isChecked } = req.body;
     try {
-        await client.query('INSERT INTO todos(message) VALUES($1)', [message]);
+        await client.query('INSERT INTO todos(title, description, isChecked) VALUES($1, $2, $3)', [title, description, isChecked]);
+    } catch(e) {
+        res.sendStatus(500);
+        return;
+    }
+    res.sendStatus(200);
+});
+
+app.delete('/api/todo/:id', async (req, res) => {
+    const { id } = req.query;
+    try {
+        await client.query('DELETE FROM todos WHERE todoid = $1', [id]);
     } catch(e) {
         res.sendStatus(500);
         return;

@@ -1,6 +1,6 @@
 import {
-  Button,
   Box,
+  Button,
   Divider,
   Flex,
   Stack,
@@ -10,32 +10,29 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-import { Task } from "./Task";
+import Task from "./Task";
 
-const jerryTasks = [
-  {
-    title: "CSC300 A2",
-    desc:
-      "Read article on facial recognition, take notes on lectures, and write responses!",
-    isChecked: false,
-  },
-  {
-    title: "Present an awesome react workshop",
-    desc:
-      "Overhaul react workshop from last year to cover more intricate React material",
-    isChecked: false,
-  },
-];
-
-export const TaskList = () => {
-  const [tasks, setTasks] = useState(jerryTasks);
+const TaskList = ({ tasksList }) => {
+  const [tasks, setTasks] = useState(tasksList);
 
   const handleAddTask = () => {
-    setTasks([...tasks, { title: "To do", desc: "...", isChecked: false }]);
+    const newTask = { title: "To do", description: "...", isChecked: false };
+    fetch("http://localhost:3001/api/todo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTask),
+    }).then(() => setTasks([...tasks, newTask]));
   };
 
-  const handleDeleteTask = (index) => {
-    setTasks((oldTasks) => oldTasks.slice(0, index).concat(oldTasks.slice(index + 1)));
+  const handleDeleteTask = (id, index) => {
+    fetch(`http://localhost:3001/api/todos/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    }).then(() =>
+      setTasks((oldTasks) =>
+        oldTasks.slice(0, index).concat(oldTasks.slice(index + 1))
+      )
+    );
   };
 
   return (
@@ -86,10 +83,12 @@ export const TaskList = () => {
                   {task.desc}
                 </Task>
               ))}
-              {tasks.length === 0 && <p>No tasks to complete~ 🥳</p>}
+            {tasks.length === 0 && <p>No tasks to complete~ 🥳</p>}
           </Stack>
         </Box>
       </Box>
     </Box>
   );
 };
+
+export default TaskList;

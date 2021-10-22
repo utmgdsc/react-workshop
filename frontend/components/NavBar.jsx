@@ -21,8 +21,7 @@ import Sticky from "react-stickynode";
 
 import { colors } from "../theme";
 
-const navBtns = [
-];
+const navBtns = [];
 
 const Logo = () => (
   <Box m="2">

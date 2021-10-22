@@ -1,4 +1,6 @@
 CREATE TABLE todos (
     todoid SERIAL PRIMARY KEY,
-    message VARCHAR(100)
+    title VARCHAR(100),
+    description VARCHAR(100),
+    isChecked BOOLEAN
 );

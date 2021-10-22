@@ -12,7 +12,14 @@ import {
 import React, { useState } from "react";
 import { HiTrash } from "react-icons/hi";
 
-export const Task = ({ index, taskTitle, checked, children, handleDeleteTask }) => {
+const Task = ({
+  index,
+  taskId,
+  taskTitle,
+  checked,
+  children,
+  handleDeleteTask,
+}) => {
   const [title, setTitle] = useState(taskTitle);
   const [desc, setDesc] = useState(children);
   const [isChecked, setIsChecked] = useState(checked);
@@ -63,9 +70,11 @@ export const Task = ({ index, taskTitle, checked, children, handleDeleteTask }) 
           icon={<HiTrash />}
           rounded="full"
           size="sm"
-          onClick={() => handleDeleteTask(index)}
+          onClick={() => handleDeleteTask(taskId, index)}
         />
       </HStack>
     </Box>
   );
 };
+
+export default Task;

@@ -21,4 +21,19 @@ const links = [
   },
 ];
 
+export const jerryTasks = [
+  {
+    title: "CSC300 A2",
+    desc:
+      "Read article on facial recognition, take notes on lectures, and write responses!",
+    isChecked: false,
+  },
+  {
+    title: "Present an awesome react workshop",
+    desc:
+      "Overhaul react workshop from last year to cover more intricate React material",
+    isChecked: false,
+  },
+];
+
 export default links;

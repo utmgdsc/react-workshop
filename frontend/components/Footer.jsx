@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
-import links from "../data/footerLinks";
+import links from "../data/constants";
 import LinkIconBar from "./LinkIconBar";
 
 export default function Footer() {
