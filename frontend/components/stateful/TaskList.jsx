@@ -21,40 +21,12 @@ const TaskList = ({ tasksList }) => {
 
   const handleAddTask = () => {
     const newTask = { title: "To do", description: "...", isChecked: false };
-    fetch("http://localhost:3001/api/todo", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newTask),
-    }).then(() => setTasks([...tasks, newTask]));
+    setTasks([...tasks, newTask]);
   };
 
-  const handleEditTask = (index, task) => {
-    fetch(`http://localhost:3001/api/todo/${task.todoId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: task.title,
-        desc: task.desc,
-        isChecked: task.isChecked,
-      }),
-    }).then(() =>
-      setTasks((oldTasks) =>
-        oldTasks
-          .slice(0, index)
-          .concat(task)
-          .concat(oldTasks.slice(index + 1))
-      )
-    );
-  };
-
-  const handleDeleteTask = (id, index) => {
-    fetch(`http://localhost:3001/api/todo/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    }).then(() =>
-      setTasks((oldTasks) =>
-        oldTasks.slice(0, index).concat(oldTasks.slice(index + 1))
-      )
+  const handleDeleteTask = (index) => {
+    setTasks((oldTasks) =>
+      oldTasks.slice(0, index).concat(oldTasks.slice(index + 1))
     );
   };
 
@@ -102,7 +74,6 @@ const TaskList = ({ tasksList }) => {
                   taskTitle={task.title}
                   checked={task.ischecked}
                   index={index}
-                  handleEditTask={handleEditTask}
                   handleDeleteTask={handleDeleteTask}
                 >
                   {task.description}

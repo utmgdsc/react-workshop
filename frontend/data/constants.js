@@ -34,6 +34,11 @@ export const jerryTasks = [
       "Overhaul react workshop from last year to cover more intricate React material",
     isChecked: false,
   },
+  {
+    title: "Listen to DONDA",
+    desc: "Need a wake me up after listening to CLB",
+    isChecked: false,
+  },
 ];
 
 export default links;
