@@ -100,12 +100,12 @@ const TaskList = ({ tasksList }) => {
                   key={`task-${task.title}`}
                   todoId={task.todoid}
                   taskTitle={task.title}
-                  checked={task.ischecked}
+                  checked={task.ischecked || task.isChecked}
                   index={index}
                   handleEditTask={handleEditTask}
                   handleDeleteTask={handleDeleteTask}
                 >
-                  {task.description}
+                  {task.description || task.desc}
                 </Task>
               ))}
             {tasks.length === 0 && <p>No tasks to complete~ 🥳</p>}

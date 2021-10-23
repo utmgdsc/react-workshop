@@ -25,6 +25,7 @@ const Task = ({
   const [desc, setDesc] = useState(children);
   const [isChecked, setIsChecked] = useState(checked);
 
+
   const badgeInfo = isChecked
     ? { color: "green", text: "Complete" }
     : { color: "yellow", text: "In Progress" };

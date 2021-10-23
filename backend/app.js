@@ -55,8 +55,6 @@ app.post("/api/todo", async (req, res) => {
 app.patch("/api/todo/:id", async (req, res) => {
   const { id } = req.params;
   const { title, desc, isChecked } = req.body;
-  console.log(id);
-  console.log(req.body);
   try {
     await client.query(
       "UPDATE todos SET title = $1, description = $2, isChecked = $3 WHERE todoid = $4",
