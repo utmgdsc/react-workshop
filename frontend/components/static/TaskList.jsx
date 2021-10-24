@@ -13,31 +13,9 @@ import React from "react";
 import Task from "./Task";
 
 const TaskList = () => (
-  <Box as="section" py="12" bg={mode("white", "gray.800")}>
-    <Box
-      maxW={{
-        base: "xl",
-        md: "7xl",
-      }}
-      minW={{
-        base: "xl",
-        md: "7xl",
-      }}
-      mx="auto"
-      px={{
-        md: "8",
-      }}
-    >
-      <Box
-        rounded={{
-          lg: "lg",
-        }}
-        bg={mode("white", "gray.700")}
-        maxW="3xl"
-        mx="auto"
-        shadow="base"
-        overflow="hidden"
-      >
+  <Box as="section">
+    <Box>
+      <Box bg={mode("white", "gray.700")} shadow="base">
         <Flex align="center" justify="space-between" px="6" py="4">
           <Text as="h3" fontWeight="bold" fontSize="lg">
             Daily Tasks
@@ -55,6 +33,12 @@ const TaskList = () => (
           <Task taskTitle="Present an awesome react workshop" checked={false}>
             Overhaul react workshop from last year to cover more intricate React
             material
+          </Task>
+          <Task taskTitle="Listen to DONDA" checked={false}>
+            Need a wake me up after hearing CLB
+          </Task>
+          <Task taskTitle="Buy Halloween costume" checked={false}>
+            Squid game?
           </Task>
         </Stack>
       </Box>
