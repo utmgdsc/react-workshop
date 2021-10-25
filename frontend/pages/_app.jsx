@@ -9,8 +9,8 @@ import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import theme from "../theme";
 
-const TITLE = "Title";
-const DESCRIPTION = "Description";
+const TITLE = "Full Stack React Workshop";
+const DESCRIPTION = "Hosted by CSSC x GDSC";
 const URL = "http://localhost:3000";
 
 const SiteHead = ({ title }) => (
