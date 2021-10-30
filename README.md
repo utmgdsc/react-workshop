@@ -2,13 +2,13 @@
 
 This repository contains the starter code for the Full Stack React workshop hosted by CSSC & GDSC
 
-# Recording
+## Recording
 [Zoom Recording](https://utoronto.zoom.us/rec/share/QG1xxbC_sjXaODQm_CMoYwjsX8Flezk4bkyKy86sf_MbFcrSICGaMEleIPWNf71E.mP-ilDAi6shw6ic7), passcode: **reactworkshop$1**
 
-# Slides
+## Slides
 [Here](https://docs.google.com/presentation/d/1B8LL6LJZrFeJm9vPrOhnilZmtF-RZ2n94ultI13z_sM/edit?usp=sharing)
 
-# More React
+## More React
 [cssc.utm.utoronto.ca/resources/react](https://cssc.utm.utoronto.ca/resources/react)
 
 
